@@ -13,6 +13,7 @@ using HtmlAgilityPack;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using TestWeb.Models;
 
 namespace TestWeb.Pages
 {
@@ -27,11 +28,12 @@ namespace TestWeb.Pages
 
         public async Task OnGet()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             WebRequest request = WebRequest.Create("http://www.weather.com.cn/weather/101300106.shtml");            //实例化WebRequest对象  
             WebResponse response = request.GetResponse();           //创建WebResponse对象  
             Stream datastream = response.GetResponseStream();       //创建流对象  
             Encoding ec = Encoding.UTF8;
-
             StreamReader reader = new StreamReader(datastream, ec);
             var htmlStr = reader.ReadToEnd();                  //读取网页内容  
             reader.Close();
@@ -44,7 +46,21 @@ namespace TestWeb.Pages
                     var htmlDoc = new HtmlDocument();
                     htmlDoc.LoadHtml(htmlStr);
                     var res=  htmlDoc.DocumentNode.SelectNodes("//div[@id='7d']/ul/li");
-                    Console.WriteLine(htmlDoc);
+                    List<WeatherModel> list = new List<WeatherModel>();
+                    foreach(var elememt in res)
+                    {
+                        var model = new WeatherModel()
+                        {
+                            Day = htmlDoc.DocumentNode.SelectSingleNode("//h1").InnerText,
+                             Weath= htmlDoc.DocumentNode.SelectSingleNode("//p[@class='wea']").InnerText,
+                            Temperature = htmlDoc.DocumentNode.SelectSingleNode("//p[@class='tem']").InnerText,
+                            Wind = (htmlDoc.DocumentNode.SelectNodes("//p[@class='win']/em/span").FirstOrDefault()?.Attributes["title"].Value?? ""),
+                            WindLevel = htmlDoc.DocumentNode.SelectSingleNode("//p[@class='win']/i").InnerText
+                        };
+                        list.Add(model);
+                    }
+                    Console.WriteLine(stopwatch.ElapsedMilliseconds);
+                    
                 }
                 catch (Exception ex)
                 {
@@ -52,23 +68,7 @@ namespace TestWeb.Pages
                 }
                 
             });
-           
-            //if (re.IsSuccessStatusCode)
-            //{
-            //    if (re.RequestMessage!=null)
-            //    {
-            //        if (!Directory.Exists("E://test"))
-            //            Directory.CreateDirectory("E://test");
-            //        using (var stream = System.IO.File.Open("E://test//" + Guid.NewGuid() + ".txt", FileMode.Create, FileAccess.ReadWrite, FileShare.Read))
-            //        {
-            //            _ = Task.Run(async () =>
-            //              {
-            //                 var model = await re.Content.ReadAsByteArrayAsync();
-            //                  stream.Write(model);
-            //               });
-            //        }
-            //}
-            //    }
+            Console.WriteLine(stopwatch.ElapsedMilliseconds);
         }
     }
 }
