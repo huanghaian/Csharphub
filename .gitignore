@@ -9,3 +9,5 @@ bin/
 obj/
 .vs/
 .suo
+/CsharpHub/TestWeb/Db/TestWeb.db-shm
+*.db-wal
