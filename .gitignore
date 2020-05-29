@@ -3,3 +3,9 @@
 ################################################################################
 
 /CsharpHub/TestWeb/Db/Hangfire.db
+/CsharpHub/TestWeb/Db/TestWeb.db
+.vs
+bin/
+obj/
+.vs/
+.suo

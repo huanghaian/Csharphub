@@ -14,16 +14,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using TestWeb.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace TestWeb.Pages
 {
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        private readonly MyDbContex _context;
+        private readonly IConfiguration _configuration;
+        public IndexModel(ILogger<IndexModel> logger, MyDbContex myDbContex, IConfiguration configuration)
         {
             _logger = logger;
+            _context = myDbContex;
+            _configuration = configuration;
         }
 
         public async Task OnGet()
@@ -39,35 +45,44 @@ namespace TestWeb.Pages
             reader.Close();
             datastream.Close();
             response.Close();
-            _=Task.Run(() =>
-            {
-                try
-                {
-                    var htmlDoc = new HtmlDocument();
-                    htmlDoc.LoadHtml(htmlStr);
-                    var res=  htmlDoc.DocumentNode.SelectNodes("//div[@id='7d']/ul/li");
-                    List<WeatherModel> list = new List<WeatherModel>();
-                    foreach(var elememt in res)
-                    {
-                        var model = new WeatherModel()
-                        {
-                            Day = htmlDoc.DocumentNode.SelectSingleNode("//h1").InnerText,
-                             Weath= htmlDoc.DocumentNode.SelectSingleNode("//p[@class='wea']").InnerText,
-                            Temperature = htmlDoc.DocumentNode.SelectSingleNode("//p[@class='tem']").InnerText,
-                            Wind = (htmlDoc.DocumentNode.SelectNodes("//p[@class='win']/em/span").FirstOrDefault()?.Attributes["title"].Value?? ""),
-                            WindLevel = htmlDoc.DocumentNode.SelectSingleNode("//p[@class='win']/i").InnerText
-                        };
-                        list.Add(model);
-                    }
-                    Console.WriteLine(stopwatch.ElapsedMilliseconds);
-                    
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
-                
-            });
+            _ = Task.Run(async () =>
+              {
+                  try
+                  {
+                      var builder = new DbContextOptionsBuilder<MyDbContex>();
+                      builder.UseSqlite($"data source ={_configuration["Storage:Db"]}" + "/" + "TestWeb.db");
+                      var context = new MyDbContex(builder.Options);
+                      var htmlDoc = new HtmlDocument();
+                      htmlDoc.LoadHtml(htmlStr);
+                      var res = htmlDoc.DocumentNode.SelectNodes("//div[@id='7d']/ul/li");
+                      List<WeatherModel> list = new List<WeatherModel>();
+                      foreach (var elememt in res)
+                      {
+                          var childDoc = new HtmlDocument();
+                          childDoc.LoadHtml(elememt.InnerHtml);
+                          var model = new WeatherModel()
+                          {
+                              Day = childDoc.DocumentNode.SelectSingleNode("//h1").InnerText.Trim(),
+                              Weath = childDoc.DocumentNode.SelectSingleNode("//p[@class='wea']").InnerText.Trim(),
+                              Temperature = childDoc.DocumentNode.SelectSingleNode("//p[@class='tem']").InnerText.Trim(),
+                              Wind = (childDoc.DocumentNode.SelectNodes("//p[@class='win']/em/span").FirstOrDefault()?.Attributes["title"].Value ?? ""),
+                              WindLevel = childDoc.DocumentNode.SelectSingleNode("//p[@class='win']/i").InnerText,
+                              UpdateTime = DateTime.Now,
+                          };
+                          list.Add(model);
+                      }
+
+                      context.WeatherModels.AddRange(list);
+
+                      await context.SaveChangesAsync();
+
+                  }
+                  catch (Exception ex)
+                  {
+                      Console.WriteLine(ex.StackTrace);
+                  }
+
+              });
             Console.WriteLine(stopwatch.ElapsedMilliseconds);
         }
     }
