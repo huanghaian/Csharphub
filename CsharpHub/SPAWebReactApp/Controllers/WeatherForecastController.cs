@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace CAPPWebApi.Controllers
+namespace SPAWebReactApp.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -35,6 +35,5 @@ namespace CAPPWebApi.Controllers
             })
             .ToArray();
         }
-        
     }
 }
