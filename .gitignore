@@ -11,3 +11,5 @@ obj/
 .suo
 /CsharpHub/TestWeb/Db/TestWeb.db-shm
 *.db-wal
+/CsharpHub/CAPPWebApi/Db
+/CsharpHub/CAPPWebApi/.config

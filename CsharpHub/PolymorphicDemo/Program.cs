@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Net;
+using System.Text;
+using uPLibrary.Networking.M2Mqtt;
+using uPLibrary.Networking.M2Mqtt.Messages;
 
 namespace PolymorphicDemo
 {
@@ -6,19 +10,30 @@ namespace PolymorphicDemo
     {
         static void Main(string[] args)
         {
-            FirstClass first = new FirstClass();
-            BaseClass baseClass = first;
-            baseClass.Alert();
-            first.Alert();
-            //FirstClass first = new FirstClass();
-            //BaseClass baseClass = first;
-            //SecondClass second = (SecondClass)baseClass;
-            //var labelUndo = new LabelUndo();
-            //labelUndo.Undo();
-            //((IUndo)labelUndo).Undo();
-            //((TextUndo)labelUndo).Undo();
-            var t = new TestClass();
-            ((T1)((T2)t)).T();
+            try
+            {
+                MqttClient client = new MqttClient("10.67.2.55");
+                client.Connect("test", "sammy", "123@abc");
+                client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
+
+                client.Subscribe(new string[] { "test-msg" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+                //client.Publish("/home/temperature", Encoding.UTF8.GetBytes("sdf"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+                Console.ReadKey();
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+           
+
+        }
+
+        private static void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+        {
+            Console.WriteLine("有推送");
+            Console.WriteLine($"主题{e.Topic}");
+            Console.WriteLine($"{System.Text.Encoding.UTF8.GetString(e.Message)}");
+            
         }
         #region class
         public class BaseClass

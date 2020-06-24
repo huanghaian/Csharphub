@@ -1,0 +1,42 @@
+﻿<metadata>
+  <!--
+  This sample removes the class: android.support.v4.content.AsyncTaskLoader.LoadTask:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='AsyncTaskLoader.LoadTask']" />
+  
+  This sample removes the method: android.support.v4.content.CursorLoader.loadInBackground:
+  <remove-node path="/api/package[@name='android.support.v4.content']/class[@name='CursorLoader']/method[@name='loadInBackground']" />
+  -->
+	<!--<attr path="/api/package[@name='com.tencent.smtt.export.external.interfaces']
+
+        interface[@name='DownloadListener']/method[@name='onDownloadStart']"
+
+        name="argsType">onDownloadStartEventArgs1</attr>-->
+	<!--<attr path="/api/package[@name='com.tencent.smtt.export.external.interfaces']
+
+        interface[@name='DownloadListener']"
+
+        name="managedName">onDownloadStart2</attr>-->
+	<!--<attr path="/api/package[@name='com.tencent.smtt.export.external.interfaces']
+
+        interface[@name='DownloadListener']/method[@name='onDownloadStart']"
+
+        name="managedName">onDownloadStart2</attr>-->
+	<!--查看源码DownloadListener 含有连个同名重载函数onDownloadStart,将其中的一个函数-->
+	<attr path="/api/package[@name='com.tencent.smtt.export.external.interfaces']/interface[@name='DownloadListener']/method[@name='onDownloadStart' and count(parameter)=5 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String'] and parameter[3][@type='java.lang.String'] and parameter[4][@type='java.lang.String'] and parameter[5][@type='long']]" name="managedName">onDownloadStart1</attr>
+	<!--编译报错UrlRequestBuilderImpl未实现以下几个方法setPriority，addHeader，setDns，disableCache，经查勘api.xml 这些方法的返回值是UrlRequestBuilderImpl，需要修改返回值为Com.Tencent.Smtt.Export.External.Interfaces.UrlRequest.Builder-->
+	<attr path="/api/package[@name='com.tencent.smtt.sdk']/class[@name='UrlRequestBuilderImpl']/method[@name='setPriority' and count(parameter)=1 and parameter[1][@type='int']]" name="managedReturn">
+		Com.Tencent.Smtt.Export.External.Interfaces.UrlRequest.Builder
+	</attr>
+	<attr path="/api/package[@name='com.tencent.smtt.sdk']/class[@name='UrlRequestBuilderImpl']/method[@name='addHeader' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" name="managedReturn">
+		Com.Tencent.Smtt.Export.External.Interfaces.UrlRequest.Builder
+	</attr>
+	<attr path="/api/package[@name='com.tencent.smtt.sdk']/class[@name='UrlRequestBuilderImpl']/method[@name='setDns' and count(parameter)=2 and parameter[1][@type='java.lang.String'] and parameter[2][@type='java.lang.String']]" name="managedReturn">
+		Com.Tencent.Smtt.Export.External.Interfaces.UrlRequest.Builder
+	</attr>
+	<attr path="/api/package[@name='com.tencent.smtt.sdk']/class[@name='UrlRequestBuilderImpl']/method[@name='disableCache' and count(parameter)=0]" name="managedReturn">
+		Com.Tencent.Smtt.Export.External.Interfaces.UrlRequest.Builder
+	</attr>
+
+
+
+</metadata>

@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PolymorphicDemo", "Polymorp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestWeb", "TestWeb\TestWeb.csproj", "{A73DB335-6786-4571-9617-F15DEC4DC55A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAPPWebApi", "CAPPWebApi\CAPPWebApi.csproj", "{FA8F7CD8-D3C9-45D7-A2B2-E5A9A21B18E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CAPPWebApi", "CAPPWebApi\CAPPWebApi.csproj", "{FA8F7CD8-D3C9-45D7-A2B2-E5A9A21B18E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPAWebReactApp", "SPAWebReactApp\SPAWebReactApp.csproj", "{7AE41CD8-599E-4E7E-93E7-68C025AB35CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPAWebReactApp", "SPAWebReactApp\SPAWebReactApp.csproj", "{7AE41CD8-599E-4E7E-93E7-68C025AB35CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TbsBindings", "TbsBindings\TbsBindings.csproj", "{DD1650D9-7114-4F91-B33F-A96B4E68CF8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7AE41CD8-599E-4E7E-93E7-68C025AB35CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AE41CD8-599E-4E7E-93E7-68C025AB35CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AE41CD8-599E-4E7E-93E7-68C025AB35CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD1650D9-7114-4F91-B33F-A96B4E68CF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD1650D9-7114-4F91-B33F-A96B4E68CF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD1650D9-7114-4F91-B33F-A96B4E68CF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD1650D9-7114-4F91-B33F-A96B4E68CF8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
