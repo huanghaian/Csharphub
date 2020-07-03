@@ -17,7 +17,7 @@ namespace PolymorphicDemo
                 client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
 
                 client.Subscribe(new string[] { "test-msg" }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-                //client.Publish("/home/temperature", Encoding.UTF8.GetBytes("sdf"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
+                client.Publish("test", Encoding.UTF8.GetBytes("sdf"), MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE, false);
                 Console.ReadKey();
             }
             catch(Exception ex)
@@ -28,6 +28,8 @@ namespace PolymorphicDemo
 
         }
 
+
+        
         private static void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
         {
             Console.WriteLine("有推送");
