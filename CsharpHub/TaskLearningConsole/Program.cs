@@ -7,7 +7,8 @@ namespace TaskLearningConsole
     {
         static void Main(string[] args)
         {
-            TestTaskRunWithWati();
+            //TestTaskRunWithWati();
+            TestTaskRunWithResult();
             Console.WriteLine("主线程");
             Console.ReadKey();
         }
@@ -26,6 +27,13 @@ namespace TaskLearningConsole
             //如果不执行Wati方法，调用结果为：（1）"Task Wait 阻塞当前方法" (2)"主线程"  (3)"Task Start" 
             task.Wait();
            Console.WriteLine("Task Wait 阻塞当前方法");
+        }
+        static void TestTaskRunWithResult()
+        {
+            var task= Task.Run(()=> { Console.WriteLine("Task Run With Result"); return 1; });
+            //调用Result 阻塞当前方法，同Wati()
+            int result = task.Result;
+            Console.WriteLine("执行Task Resut");
         }
 
     }
