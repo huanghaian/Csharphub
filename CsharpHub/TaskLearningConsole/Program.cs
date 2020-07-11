@@ -28,7 +28,7 @@ namespace TaskLearningConsole
             task.Wait();
            Console.WriteLine("Task Wait 阻塞当前方法");
         }
-        static void TestTaskRunWithResult()
+        static void TestTaskRunWithResult ()
         {
             var task= Task.Run(()=> { Console.WriteLine("Task Run With Result"); return 1; });
             //调用Result 阻塞当前方法，同Wati()
