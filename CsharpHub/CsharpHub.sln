@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SPAWebReactApp", "SPAWebRea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TbsBindings", "TbsBindings\TbsBindings.csproj", "{DD1650D9-7114-4F91-B33F-A96B4E68CF8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskLearningConsole", "TaskLearningConsole\TaskLearningConsole.csproj", "{D4B8DD62-5503-4AE3-8C3E-A345E4AE68C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskLearningConsole", "TaskLearningConsole\TaskLearningConsole.csproj", "{D4B8DD62-5503-4AE3-8C3E-A345E4AE68C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClassConsole", "TestClassConsole\TestClassConsole.csproj", "{A848A860-4B2E-46EB-8607-EE5503AF407A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{D4B8DD62-5503-4AE3-8C3E-A345E4AE68C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4B8DD62-5503-4AE3-8C3E-A345E4AE68C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4B8DD62-5503-4AE3-8C3E-A345E4AE68C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A848A860-4B2E-46EB-8607-EE5503AF407A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A848A860-4B2E-46EB-8607-EE5503AF407A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A848A860-4B2E-46EB-8607-EE5503AF407A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A848A860-4B2E-46EB-8607-EE5503AF407A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
