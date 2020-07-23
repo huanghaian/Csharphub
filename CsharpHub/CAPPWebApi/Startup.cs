@@ -30,6 +30,7 @@ namespace CAPPWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddDbContext<MyDbContext>(options => options.UseSqlite("data source = " + "Db" + "/" + "TestWeb.db"));
             var sqliteOptions = new SQLiteStorageOptions();
             SQLitePCL.Batteries.Init();
