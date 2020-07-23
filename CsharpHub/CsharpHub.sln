@@ -15,7 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TbsBindings", "TbsBindings\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskLearningConsole", "TaskLearningConsole\TaskLearningConsole.csproj", "{D4B8DD62-5503-4AE3-8C3E-A345E4AE68C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestClassConsole", "TestClassConsole\TestClassConsole.csproj", "{A848A860-4B2E-46EB-8607-EE5503AF407A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestClassConsole", "TestClassConsole\TestClassConsole.csproj", "{A848A860-4B2E-46EB-8607-EE5503AF407A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCropBinding", "UCropBinding\UCropBinding.csproj", "{161C2052-69D7-49BD-8779-59CE6C94D24B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{A848A860-4B2E-46EB-8607-EE5503AF407A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A848A860-4B2E-46EB-8607-EE5503AF407A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A848A860-4B2E-46EB-8607-EE5503AF407A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{161C2052-69D7-49BD-8779-59CE6C94D24B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{161C2052-69D7-49BD-8779-59CE6C94D24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{161C2052-69D7-49BD-8779-59CE6C94D24B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{161C2052-69D7-49BD-8779-59CE6C94D24B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
