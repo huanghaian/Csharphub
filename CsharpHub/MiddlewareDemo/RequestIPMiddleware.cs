@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace MiddlewareDemo
 {
