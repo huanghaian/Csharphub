@@ -14,13 +14,9 @@ namespace TestClassConsole
     class Program
     {
         private static Func<string, IEnumerable<string>> webGetString = MemoizeThreadSafe<string, IEnumerable<string>>(GetString);
+        public static List<object> list;
         static void Main(string[] args)
         {
-            Task.Run(async () =>
-            {
-                await UoloadWithMulti();
-            });
-           
             Console.ReadKey();
         }
 
