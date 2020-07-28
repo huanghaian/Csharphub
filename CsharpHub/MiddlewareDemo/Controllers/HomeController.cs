@@ -15,6 +15,7 @@ namespace MiddlewareDemo.Controllers
         }
         public IActionResult RedirectSecurityPage([FromQuery]string link)
         {
+            //类似知乎等网站跳转外链提示页
             ViewBag.href = WebUtility.UrlDecode(link);
             return View();
         }
