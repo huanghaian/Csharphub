@@ -12,5 +12,9 @@ namespace MiddlewareDemo
         {
             return builder.UseMiddleware<RequestIPMiddleware>();
         }
+        public static IApplicationBuilder UseSecurutyHost(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<SecurityHostMiddleware>("localhost");
+        }
     }
 }
