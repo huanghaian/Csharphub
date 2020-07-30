@@ -21,6 +21,7 @@ namespace MiddlewareDemo
         {
             try
             {
+                //如果这里redis宕机或者未运行会导致每个请求延迟，不适用。。
                 var distributedCache = context.RequestServices.GetService<IDistributedCache>();
                 var result = await distributedCache.GetAsync("IP");
                 if (result == null)
@@ -45,7 +46,7 @@ namespace MiddlewareDemo
                 }
                 
             }
-            catch
+            catch(Exception ex)
             {
                 await _next.Invoke(context);
             }
