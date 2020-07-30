@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 using TestClassConsole.Entity.Virtuals;
@@ -18,6 +19,63 @@ namespace TestClassConsole
         static void Main(string[] args)
         {
             Console.ReadKey();
+        }
+        public static int BinSearch1(int[] array,int key)
+        {
+            int mid;
+            int start = 0;
+            int end = array.Length - 1;
+            while (start <= end)
+            {
+                mid = (end - start) / 2 + start;
+                if (key < array[mid])
+                {
+                    end = mid - 1;
+                }
+                else if (key > array[mid])
+                {
+                    start = mid + 1;
+                }
+                else
+                {
+                    return mid;
+                }
+            }
+            return -1;
+
+        }
+
+        public static int BinSearch2(int[] array, int key)
+        {
+            var left = 0;
+            var right = array.Length - 1;
+            var mid = (right - left) / 2;
+            while (left <= right)
+            {
+
+                if (array[mid] < key)
+                {
+                    left = mid + 1;
+                    if (right == left)
+                        mid = right;
+                    else
+                        mid = mid + (right - left);
+                }
+                else if (array[mid] > key)
+                {
+                    right = mid - 1;
+                    if (right == left)
+                        mid = right;
+                    else
+                        mid = mid - (right - left);
+                }
+                else
+                {
+                    return mid;
+                }
+
+            }
+            return -1;
         }
 
         private static async Task UoloadWithSinagle()
