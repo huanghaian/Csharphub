@@ -158,7 +158,7 @@ namespace TestClassConsole
 
         static void GetVal(out int v)
         {
-            //out 关键词，传参进来的变量v不需要出事话，但是如果直接对v进行操作会有异常，比如使用v.ToString()【编译器会报错:使用未赋值的变量v】，然后在对V赋值；是不允许的。
+            //out 关键词，传参进来的变量v不需要初始化，但是如果直接对v进行操作会有异常，比如使用v.ToString()【编译器会报错:使用未赋值的变量v】，然后在对V赋值；是不允许的。
             // v.ToString(); //这里调用ToString(),是不允许的。
             v = 10;
         }
