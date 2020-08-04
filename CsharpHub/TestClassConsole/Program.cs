@@ -16,10 +16,58 @@ namespace TestClassConsole
     {
         private static Func<string, IEnumerable<string>> webGetString = MemoizeThreadSafe<string, IEnumerable<string>>(GetString);
         public static List<object> list;
+        private static SemaphoreSlim semaphoreSlim;
+        private static SemaphoreSlim semaphore;
+
         static void Main(string[] args)
         {
+            for(int i = 0; i < 10; i++)
+            {
+                var threadName = i;
+                int seconds =2;
+                var t = new Thread(async() =>await AcquireSemaphore(threadName.ToString(),seconds));
+                t.Start();
+            }
             Console.ReadKey();
         }
+        private static SemaphoreSlim _Semaphore = new SemaphoreSlim(1);
+        private static async Task AcquireSemaphore(string name,int seconds)
+        {
+            Console.WriteLine($"wait {name}");
+            await _Semaphore.WaitAsync();
+            Console.WriteLine($"{name} Access");
+            Thread.Sleep(TimeSpan.FromSeconds(seconds));
+            Console.WriteLine($"{name} Release");
+            _Semaphore.Release();
+
+        }
+
+        private static void SemaphoreSlim()
+        {
+            semaphore = new SemaphoreSlim(1, 1);
+            var tasks = new Task[2];
+
+            for (int i = 0; i <= 1; i++)
+            {
+                tasks[i] = Task.Run(() =>
+                {
+                    Console.WriteLine("Task {0}等待信号量",
+                        Task.CurrentId);
+                    semaphore.Wait();
+                    Console.WriteLine("Task {0} 获得信号量.", Task.CurrentId);
+                    //模拟做事情况
+                    Thread.Sleep(1000);
+
+                    Console.WriteLine("Task {0} 释放信号量; 释放前数目: {1}.",
+                        Task.CurrentId, semaphore.Release());
+                });
+            }
+
+            // 等待task执行完成.
+            Task.WaitAll(tasks);
+            Console.WriteLine("等待所有任务完成。");
+        }
+
         public static int BinSearch1(int[] array,int key)
         {
             int mid;

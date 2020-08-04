@@ -7,21 +7,24 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
 
 namespace MiddlewareDemo
 {
     public class RequestIPMiddleware
     {
         private readonly RequestDelegate _next;
-        public RequestIPMiddleware(RequestDelegate next)
+        private readonly IConfiguration _configuration;
+        public RequestIPMiddleware(RequestDelegate next,IConfiguration configuration)
         {
             _next = next;
+            _configuration = configuration;
         }
         public async Task Invoke(HttpContext context)
         {
             try
             {
-                //如果这里redis宕机或者未运行会导致每个请求延迟，不适用。。
+                //如果这里redis宕机或者未运行会导致每个请求延迟，不适用。从配置文件中读取
                 var distributedCache = context.RequestServices.GetService<IDistributedCache>();
                 var result = await distributedCache.GetAsync("IP");
                 if (result == null)
