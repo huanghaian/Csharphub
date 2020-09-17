@@ -1,15 +1,32 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace TaskLearningConsole
 {
     class Program
     {
+        const string MutexName = "CSharpThreadingCookbook";
+
         static void Main(string[] args)
         {
             //TestTaskRunWithWati();
-            TestTaskRunWithResult();
-            Console.WriteLine("主线程");
+            //TestTaskRunWithResult();
+            using (var m = new Mutex(false,MutexName))
+            {
+                var result = m.WaitOne();
+                if (!result)
+                {
+                    Console.WriteLine("second instance is Runing!");
+                }
+                else
+                {
+                    Console.WriteLine("Running!");
+                    Console.ReadKey();
+                    m.ReleaseMutex();
+                }
+            }
+                Console.WriteLine("主线程");
             Console.ReadKey();
         }
 
